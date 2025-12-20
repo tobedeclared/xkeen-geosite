@@ -29,7 +29,7 @@ jobs:
       - name: Build custom.dat file
         run: |
           cd code || exit 1
-          go run ./ --outputdir=../ --exportlists=category-ads-all,tld-cn,cn,tld-\!cn,geolocation-\!cn,apple,icloud
+          go run ./ --outputdir=../
           cd ../ && rm -rf code
           mv custom.dat TEST-${{ github.run_number }}-custom.dat
 

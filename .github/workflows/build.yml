@@ -36,7 +36,7 @@ jobs:
       - name: Build custom.dat file
         run: |
           cd code || exit 1
-          go run ./ --outputdir=../ --exportlists=category-ads-all,tld-cn,cn,tld-\!cn,geolocation-\!cn,apple,icloud
+          go run ./ --outputdir=../
           cd ../ && rm -rf code
 
       - name: Generate custom.dat sha256 hash
@@ -66,6 +66,6 @@ jobs:
 
       - name: Release and upload assets
         run: |
-          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./dlc.dat ./dlc.dat.*
+          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./custom.dat ./custom.dat.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
