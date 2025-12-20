@@ -1,5 +1,3 @@
-include:intel-dev
-
 # All .intel domains
 intel
 
@@ -153,6 +151,7 @@ intel.vu
 intel.wf
 intel.yt
 
+intelcorp.scene7.com
 altera.co.jp
 altera.com
 alteraforum.com
@@ -277,3 +276,27 @@ xscale.com
 
 # Barefoot Networks
 barefootnetworks.com
+
+01.org
+hyperscan.io
+intellinuxgraphics.com
+intellinuxgraphics.net
+oneapi.com
+oneapi.io
+opencas.io
+opendroneid.org
+openvino.ai
+openvinotoolkit.org
+renderingtoolkit.org
+snap-telemetry.io
+universalscalablefirmware.org
+
+# ACPI Component Architecture
+acpica.com
+
+# Clear Linux
+clearlinux.org
+
+# OSPRay
+ospray.net
+ospray.org
