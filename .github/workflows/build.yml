@@ -27,6 +27,11 @@ jobs:
           go-version-file: code/go.mod
           cache-dependency-path: code/go.sum
 
+      - name: Set variables
+        run: |
+          echo "NAME=${date '+%d-%m-%Y.%H-%M-%S'}" >> $GITHUB_ENV
+        shell: bash
+
       - name: Build geosite_tbd.dat file
         run: |
           cd code || exit 1
@@ -37,37 +42,19 @@ jobs:
         run: |
           sha256sum geosite_tbd.dat > geosite_tbd.dat.sha256sum
 
-      - name: Git push assets to "release" branch and set version
+      - name: Git push assets to "release" branch
         run: |
           git init
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b release
-          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
-
-          DATE_STR=$(date '+%d-%m-%Y')
-          BUILD_NUM=$(git ls-remote origin release \
-            | grep -o "v[0-9]+\.${DATE_STR}" \
-            | sort -V \
-            | tail -1 \
-            | cut -d'.' -f1 \
-            | sed 's/v//' \
-            || echo 0)
-          NEXT_BUILD=$((BUILD_NUM + 1))
-
-          echo "RELEASE_NAME=v${NEXT_BUILD} (${DATE_STR})" >> $GITHUB_ENV
-          echo "TAG_NAME=v${NEXT_BUILD}.${DATE_STR}" >> $GITHUB_ENV
-
           git add *.sha256sum geosite_tbd.dat
-          git commit -m "${{ env.RELEASE_NAME }}"
+          git commit -m "${{ env.NAME }}"
+          git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
 
       - name: Release and upload assets
         run: |
-          gh release create "${{ env.TAG_NAME }}" \
-            --generate-notes \
-            --latest \
-            --title "${{ env.RELEASE_NAME }}" \
-            ./geosite_tbd.dat
+          gh release create "${{ env.NAME }}" --generate-notes --latest --title "${{ env.NAME }}" ./geosite_tbd.dat
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
