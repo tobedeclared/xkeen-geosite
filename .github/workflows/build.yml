@@ -29,10 +29,10 @@ jobs:
 
       - name: Set variables
         run: |
-          DATE_STR=$(date '+%d%m%Y')
+          DATE_STR=$(date '+%d-%m-%Y')
           BUILD_NUM=$(git ls-remote origin release | grep -o "v${DATE_STR}\.\d+" | sort -V | tail -1 | cut -d'.' -f2 || echo 0)
           NEXT_BUILD=$((BUILD_NUM + 1))
-          echo "RELEASE_NAME=Version ${NEXT_BUILD} (${DATE_STR})" >> $GITHUB_ENV
+          echo "RELEASE_NAME=v${NEXT_BUILD} (${DATE_STR})" >> $GITHUB_ENV
           echo "TAG_NAME=v${NEXT_BUILD}.${DATE_STR}" >> $GITHUB_ENV
         shell: bash
 
