@@ -26,15 +26,15 @@ jobs:
           echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
         shell: bash
 
-      - name: Build custom.dat file
+      - name: Build geosite_tbd.dat file
         run: |
           cd code || exit 1
           go run ./ --outputdir=../
           cd ../ && rm -rf code
-          mv custom.dat TEST-${{ github.run_number }}-custom.dat
+          mv geosite_tbd.dat TEST-${{ github.run_number }}-geosite_tbd.dat
 
-      - name: Upload TEST-${{ github.run_number }}-custom.dat
+      - name: Upload TEST-${{ github.run_number }}-geosite_tbd.dat
         uses: actions/upload-artifact@v6
         with:
-          name: TEST-${{ github.run_number }}-custom.dat
-          path: TEST-${{ github.run_number }}-custom.dat
+          name: TEST-${{ github.run_number }}-geosite_tbd.dat
+          path: TEST-${{ github.run_number }}-geosite_tbd.dat

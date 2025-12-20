@@ -1,4 +1,4 @@
-name: Build custom.dat
+name: Build geosite_tbd.dat
 on:
   push:
     branches:
@@ -33,25 +33,15 @@ jobs:
           echo "TAG_NAME=$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
         shell: bash
 
-      - name: Build custom.dat file
+      - name: Build geosite_tbd.dat file
         run: |
           cd code || exit 1
           go run ./ --outputdir=../
           cd ../ && rm -rf code
 
-      - name: Generate custom.dat sha256 hash
+      - name: Generate geosite_tbd.dat sha256 hash
         run: |
-          sha256sum custom.dat > custom.dat.sha256sum
-
-      - name: Generate Zip
-        run: |
-          zip -9 custom.dat.zip custom.dat
-          sha256sum custom.dat.zip > custom.dat.zip.sha256sum
-
-      - name: Generate XZ
-        run: |
-          xz -z -9 -k custom.dat
-          sha256sum custom.dat.xz > custom.dat.xz.sha256sum
+          sha256sum geosite_tbd.dat > geosite_tbd.dat.sha256sum
 
       - name: Git push assets to "release" branch
         run: |
@@ -59,13 +49,13 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b release
-          git add *.sha256sum custom.dat custom.dat.zip custom.dat.xz
+          git add *.sha256sum geosite_tbd.dat
           git commit -m "${{ env.RELEASE_NAME }}"
           git remote add origin "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           git push -f -u origin release
 
       - name: Release and upload assets
         run: |
-          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./custom.dat ./custom.dat.*
+          gh release create ${{ env.TAG_NAME }} --generate-notes --latest --title ${{ env.RELEASE_NAME }} ./geosite_tbd.dat
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
