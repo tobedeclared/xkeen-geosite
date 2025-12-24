@@ -35,7 +35,7 @@ jobs:
       - name: Build geosite_tbd.dat file
         run: |
           cd code || exit 1
-          go run ./
+          go run ./ --outputdir=../
           cd ../ && rm -rf code
 
       - name: Git push assets to "release" branch
