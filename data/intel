@@ -1,8 +1,20 @@
-include:intel-dev
-
-# All .intel domains
-intel
-
+01.org
+hyperscan.io
+intellinuxgraphics.com
+intellinuxgraphics.net
+oneapi.com
+oneapi.io
+opencas.io
+opendroneid.org
+openvino.ai
+openvinotoolkit.org
+renderingtoolkit.org
+snap-telemetry.io
+universalscalablefirmware.org
+acpica.com
+clearlinux.org
+ospray.net
+ospray.org
 intel.ac
 intel.ae
 intel.af
@@ -24,7 +36,7 @@ intel.cg
 intel.ch
 intel.cl
 intel.cm
-intel.cn @cn
+intel.cn
 intel.co
 intel.co.ae
 intel.co.cr
@@ -152,7 +164,6 @@ intel.vn
 intel.vu
 intel.wf
 intel.yt
-
 altera.co.jp
 altera.com
 alteraforum.com
@@ -272,8 +283,6 @@ vokevr.com
 vpro.com
 vpro.net
 xeon.com
-xn--ztsq84g.cn # 奔腾.cn
+xn--ztsq84g.cn
 xscale.com
-
-# Barefoot Networks
 barefootnetworks.com
