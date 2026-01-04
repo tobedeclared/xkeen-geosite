@@ -5,6 +5,7 @@ on:
       - master
     paths-ignore:
       - "**/README.md"
+      - ".gitignore"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,7 +33,7 @@ jobs:
           echo "NAME=v$(date +%d%m%Y.%H%M)" >> $GITHUB_ENV
         shell: bash
 
-      - name: Build geosite_tbd.dat file
+      - name: Build GeoSite files
         run: |
           cd code || exit 1
           go run ./ --outputdir=../
