@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	dataPath    = flag.String("datapath", "./data/domains", "Path to your custom 'data' directory")
+	dataPath    = flag.String("datapath", "./data", "Path to your custom 'data' directory")
 	outputName  = flag.String("outputname", "geosite_tbd.dat", "Name of the generated dat file")
 	outputDir   = flag.String("outputdir", "./", "Directory to place all generated files")
 	exportLists = flag.String("exportlists", "", "Lists to be flattened and exported in plaintext format, separated by ',' comma")
