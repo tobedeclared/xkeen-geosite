@@ -33,30 +33,6 @@ jobs:
           echo "NAME=v$(date +%d%m%Y.%H%M)" >> $GITHUB_ENV
         shell: bash
 
-      - name: Download and process multiple trackers lists
-        run: |
-          mkdir -p code/data
-
-          SOURCES=(
-            "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt"
-          )
-
-          TEMP_FILE="trackers_combined.txt"
-          > "$TEMP_FILE"
-
-          for URL in "${SOURCES[@]}"; do
-            echo "Downloading from $URL..."
-            curl -sSL "$URL" >> "$TEMP_FILE" || \
-              echo "Warning: Failed to download $URL" >&2
-          done
-
-          grep -oE '://[^:/]+' "$TEMP_FILE" | \
-            sed 's/:////' | \
-            sort | \
-            uniq > data/trackers
-
-          rm -f "$TEMP_FILE"
-
       - name: Build GeoSite files
         run: |
           cd code || exit 1
