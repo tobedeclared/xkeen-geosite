@@ -33,38 +33,38 @@ jobs:
           echo "NAME=v$(date +%d%m%Y.%H%M)" >> $GITHUB_ENV
         shell: bash
 
-- name: Download and process multiple trackers lists
-  run: |
-    # Создаём папку data (если её нет)
-    mkdir -p code/data
-
-
-    # Список источников
-    SOURCES=(
-      "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt"
-      # Добавьте другие URL при необходимости
-    )
-
-    TEMP_FILE="trackers_combined.txt"
-    > "$TEMP_FILE"  # Очищаем временный файл
-
-    
-    # Скачиваем все источники
-    for URL in "${SOURCES[@]}"; do
-      echo "Downloading from $URL..."
-      curl -sSL "$URL" >> "$TEMP_FILE" || \
-        echo "Warning: Failed to download $URL" >&2
-    done
-
-    # Извлекаем домены, очищаем, сохраняем в code/data/trackers
-    grep -oE '://[^:/]+' "$TEMP_FILE" | \
-      sed 's|://||' | \          # Исправлен синтаксис sed (используем | как разделитель)
-      sort | \
-      uniq > code/data/trackers
-
-    # Удаляем временный файл
-    rm -f "$TEMP_FILE"
-  shell: bash
+      - name: Download and process multiple trackers lists
+        run: |
+          # Создаём папку data (если её нет)
+          mkdir -p code/data
+      
+      
+          # Список источников
+          SOURCES=(
+            "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt"
+            # Добавьте другие URL при необходимости
+          )
+      
+          TEMP_FILE="trackers_combined.txt"
+          > "$TEMP_FILE"  # Очищаем временный файл
+      
+          
+          # Скачиваем все источники
+          for URL in "${SOURCES[@]}"; do
+            echo "Downloading from $URL..."
+            curl -sSL "$URL" >> "$TEMP_FILE" || \
+              echo "Warning: Failed to download $URL" >&2
+          done
+      
+          # Извлекаем домены, очищаем, сохраняем в code/data/trackers
+          grep -oE '://[^:/]+' "$TEMP_FILE" | \
+            sed 's|://||' | \          # Исправлен синтаксис sed (используем | как разделитель)
+            sort | \
+            uniq > code/data/trackers
+      
+          # Удаляем временный файл
+          rm -f "$TEMP_FILE"
+        shell: bash
 
 
       - name: Build GeoSite files
