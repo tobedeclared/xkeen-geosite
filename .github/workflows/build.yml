@@ -35,8 +35,6 @@ jobs:
 
       - name: Download and process multiple trackers lists
         run: |
-          mkdir -p code/data
-
           SOURCES=(
             "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt"
           )
