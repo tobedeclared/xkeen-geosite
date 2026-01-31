@@ -38,6 +38,10 @@ tracker.ghostchu-services.top
 tr.nyacat.pw
 ftp.pet
 
+# DHT
+dht.libtorrent.org
+dht.transmissionbt.com
+router.bittorrent.com
+
 # Torrent clients
-bittorrent.com
 qbittorrent.org
